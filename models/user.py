@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
 """ inherits from the parent class Basemodel"""
+from models.base_model import BaseModel
 class User(BaseModel):
     """class attributes which are empty"""
     email:str = " "

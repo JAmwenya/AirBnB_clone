@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
 """ a module that definesa review"""
+from models.base_model import BaseModel
 class Review(BaseModel):
     """ a calss that creates the review"""
     place_id:str = " "
