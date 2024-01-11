@@ -2,7 +2,7 @@
 # Background Context
 # Welcome to the AirBnB clone project!
 
-![Example Image](home/vagrant/vagrant_files/airbnb.png)
+![Example Image](/home/vagrant/vagrant_files/airbnb.png)
 
 
 Before starting, please read the AirBnB concept page.
