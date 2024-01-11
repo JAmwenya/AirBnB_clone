@@ -2,8 +2,6 @@
 """
 class that defines a place
 """
-class Place (basemodel)
-
 from models.base_model import BaseModel
 
 class Place(BaseModel):
