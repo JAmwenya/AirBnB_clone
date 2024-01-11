@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-class that defines an amenity
+module that defines an amenity
 """
 from models.base_model import BaseModel
 

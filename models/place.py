@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-class that defines a place
+module that defines a place
 """
 from models.base_model import BaseModel
 

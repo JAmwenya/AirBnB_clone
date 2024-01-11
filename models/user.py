@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" inherits from the parent class Basemodel"""
+""" module that inherits from the parent class Basemodel"""
 from models.base_model import BaseModel
 class User(BaseModel):
     """class attributes which are empty"""
