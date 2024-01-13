@@ -13,6 +13,7 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """ command processor """
     prompt = "(hbnb) "
+    lastcmd = ""
     __class = {
             "Basemodel",
             "Amenity",
@@ -28,12 +29,14 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """ Quit command to exit the program"""
         return True
-    def do_empty(self, line):
+    def emptyline(self):
         """
         does nothing when line is empty"""
         pass
      
     def do_create(self, line):
+        """creates an instance of BaseModel, saves it to a json file and
+        prints the id"""
         lines = line.split()[0]
         if len(lines) == 0:
             print("** class name missing **")
