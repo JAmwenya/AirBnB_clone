@@ -1,5 +1,13 @@
 #!/usr/bin/python3
+"""Defines the FileStorage class."""
 import json
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+
 class FileStorage:
     __file_path = "file.json"
     __objects = {}
@@ -13,14 +21,26 @@ class FileStorage:
         FileStorage.__objects[key] = obj
         self.obj = obj.__class.__name
     def save(self):
-        with open ("_file_path", "w") as file:
-            json.dump(self.__object, file)
+        """Serializes __objects to a JSON file at the specified path (__file_path)"""
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
+            object_dict = FileStorage.__objects
+            my_serialized_obj = {key: obj.to_dict() for key, obj in object_dict.items()}
+            json.dump(my_serialized_obj, file)
 
 
     def reload(self):
-        with open(self.__file_path, "r") as file:
-            try:
-                self.__objects = json.load(file)
-                return "{}".format(self.__objects)
-        except json.JSONDecodeError:
-            return "Error decoding JSON data"
+        """
+        deserializes the JSON file to __objects, if the JSON
+        file exists, otherwise nothing happens)
+        """
+        try:
+            with open(FileStorage.__file_path, 'r') as f:
+                team_dict = json.loads(f.read())
+                for value in team_dict.values():
+                    cls1_name = value["__class__"]
+                    self.new(eval(cls1_name)(**value))
+        except Exception:
+            pass
+
+      
+
