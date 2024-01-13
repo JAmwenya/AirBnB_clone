@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ a module that defines a base class"""
 import uuid
-from models import storage
+#from models import storage
 from datetime import datetime
 
 class BaseModel:
@@ -30,8 +30,6 @@ class BaseModel:
     
     def to_dict(self):
         """
-        Returns a dictionary representation of the object.
-
         Returns:
         dict: Dictionary containing 'id', 'created_at', 'updated_at', and '__class__' attributes.
         """
@@ -40,10 +38,12 @@ class BaseModel:
         my1_dict['updated_at'] = self.updated_at.isoformat()
         my1_dict['__class__'] = self.__class__.__name__
         return my1_dict
-        return obj_dict
+
     def save(self):
         """ method that  the public instance attribute"""
+        from models import storage
         self.updated_at = datetime.now()
+        storage.save(self)
         
 
     def __str__(self):
