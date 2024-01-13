@@ -32,18 +32,11 @@ class BaseModel:
         Returns:
         dict: Dictionary containing 'id', 'created_at', 'updated_at', and '__class__' attributes.
         """
-        #my1_dict = self.__dict__.copy()
-        #my1_dict['created_at'] = self.created_at.isoformat()
-        #my1_dict['updated_at'] = self.updated_at.isoformat()
-        #my1_dict['__class__'] = self.__class__.__name__
-        #return my1_dict
         obj_dict = {
-            'id': self.id,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
             '__class__': self.__class__.__name__
         }
-
         return obj_dict
     def save(self):
         """ method that  the public instance attribute"""
@@ -58,9 +51,3 @@ class BaseModel:
         """
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
-        # return f"[{class_name}] ({self.id}) {self.__dict__}" 
-
-# Creating an instance of BaseModel and printing its string representation
-user = BaseModel()
-print(str(user))
-
