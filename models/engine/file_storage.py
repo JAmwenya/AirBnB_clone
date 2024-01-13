@@ -24,6 +24,3 @@ class FileStorage:
                 return "{}".format(self.__objects)
         except json.JSONDecodeError:
             return "Error decoding JSON data"
-
-      
-
