@@ -50,13 +50,15 @@ class HBNBCommand(cmd.Cmd):
         """
         Creates an instance of BaseModel, saves it to a json file, and prints the id
         """
-        lines = line.split()[0]
-        if len(lines) == 0:
+        lines = line.split()
+        if not lines:
             print("** class name missing **")
+            return
         my_class = lines[0]
         if  my_class not in self.class_list:
             print("** class doesn't exist **")
-        class_instance = eval(my_class)()
+            return
+        class_instance = eval(my_class)
         class_instance.save()
         print(class_instance.id)
 
@@ -64,14 +66,17 @@ class HBNBCommand(cmd.Cmd):
         """ 
         Prints the string representation of an instance based on the class name and id
         """
-        lines = line.split()[0]
-        if len(lines) == 0:
+        lines = line.split()
+        if not lines:
             print("** class name missing **")
+            return
         my_class = lines[0]
         if  my_class not in self.class_list:
             print("** class doesn't exist **")
-        if lines[1] == 1:
+            return
+        if len(lines) < 2:
             print("** instance id missing **")
+            return 
         my_id = lines[1]
         key = "{}.{}".format(my_class, my_id)
         if key not in models.storage.all():
@@ -83,14 +88,17 @@ class HBNBCommand(cmd.Cmd):
         """
         Deletes an instance based on the class name and id and saves the changes
         """
-        lines = line.split()[0]
-        if len(lines) == 0:
+        lines = line.split()
+        if not lines:
             print("** class name missing **")
+            return
         my_class = lines[0]
         if  my_class not in self.class_list:
             print("** class doesn't exist **")
-        if lines[1] == 1:
+            return
+        if len(lines) < 2:
             print("** instance id missing **")
+            return
         my_id = lines[1]
         key = "{}.{}".format(my_class, my_id)
         if key not in models.storage.all():
@@ -103,14 +111,14 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints all string representations of instances based on the class name or all instances
         """
-        lines = line.split()[0]
-        my_class = lines[0]
-        if  my_class not in self.class_list:
-           print("** class doesn't exist **")
-        class_name = lines[0] if lines else None
-        if class_name:
+        lines = line.split()
+        if lines and lines[0] not in self.class_list:
+            print("**class does not exist**")
+            return
+        my_class = lines[0] if lines else None
+        if my_class:
             instances = [
-                    str(value) for key, value in models.storage.all().items() if key.startswith(class_name + ".")]
+                    str(value) for key, value in models.storage.all().items() if key.startswith(my_class + ".")]
         else:
             instances = [
                     str(value) for key, value in
@@ -122,14 +130,17 @@ class HBNBCommand(cmd.Cmd):
         """
         Updates an instance based on the class name and id by adding or updating an attribute
         """
-        lines = lines.split()[0]
-        if len(lines) == 0:
+        lines = lines.split()
+        if not lines:
             print("** class name missing **")
+            return
         my_class = lines[0]
         if  my_class not in self.class_list:
            print("** class doesn't exist **")
-        if lines[1] == 1:
+           return
+        if len(lines) < 2:
             print("** instance id missing **")
+            return
         my_id = lines[1]
         key = "{}.{}".format(my_class, my_id)
         if key not in models.storage.all():
