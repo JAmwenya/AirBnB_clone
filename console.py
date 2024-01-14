@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-""" 
-entry point to the command interpreter
+"""
+Entry point to the command interpreter
 """
 import models
 import cmd
@@ -15,27 +15,21 @@ from models import FileStorage
 import json
 
 class HBNBCommand(cmd.Cmd):
-    """ 
+    """
     Command processor for the HBNB project
     """
     prompt = "(hbnb) "
     lastcmd = ""
-    class_list = ["Amenity",
-            "City",
-            "Place",
-            "Review",
-            "State",
-            "User",
-            "Basemodel"]            
+    class_list = ["Amenity", "City", "Place", "Review", "State", "User", "BaseModel"]
 
     def do_quit(self, line):
-        """ 
+        """
         Quit command to exit the program
         """
         return True
 
     def do_EOF(self, line):
-        """ 
+        """
         Quit command to exit the program
         """
         return True
@@ -55,15 +49,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         my_class = lines[0]
-        if  my_class not in self.class_list:
+        if my_class not in self.class_list:
             print("** class doesn't exist **")
             return
-        class_instance = eval(my_class)
+        class_instance = globals()[my_class]()
         class_instance.save()
         print(class_instance.id)
 
     def do_show(self, line):
-        """ 
+        """
         Prints the string representation of an instance based on the class name and id
         """
         lines = line.split()
@@ -71,12 +65,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         my_class = lines[0]
-        if  my_class not in self.class_list:
+        if my_class not in self.class_list:
             print("** class doesn't exist **")
             return
         if len(lines) < 2:
             print("** instance id missing **")
-            return 
+            return
         my_id = lines[1]
         key = "{}.{}".format(my_class, my_id)
         if key not in models.storage.all():
@@ -93,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         my_class = lines[0]
-        if  my_class not in self.class_list:
+        if my_class not in self.class_list:
             print("** class doesn't exist **")
             return
         if len(lines) < 2:
@@ -113,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
         """
         lines = line.split()
         if lines and lines[0] not in self.class_list:
-            print("**class does not exist**")
+            print("** class doesn't exist **")
             return
         my_class = lines[0] if lines else None
         if my_class:
@@ -121,8 +115,7 @@ class HBNBCommand(cmd.Cmd):
                     str(value) for key, value in models.storage.all().items() if key.startswith(my_class + ".")]
         else:
             instances = [
-                    str(value) for key, value in
-                    models.storage.all().items()
+                    str(value) for key, value in models.storage.all().items()
                     ]
         print(instances)
 
@@ -135,7 +128,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         my_class = lines[0]
-        if  my_class not in self.class_list:
+        if my_class not in self.class_list:
            print("** class doesn't exist **")
            return
         if len(lines) < 2:
