@@ -42,7 +42,3 @@ class FileStorage:
                     self.new(eval(cls1_name)(**value))
         except Exception:
             pass
-<<<<<<< HEAD
-
-=======
->>>>>>> 87d7ef3a46c78d96ec671e2b2a17810dc4b24599
