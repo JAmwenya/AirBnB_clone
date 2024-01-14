@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines the FileStorage class."""
 import json
+from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 from models.city import City
@@ -19,7 +20,7 @@ class FileStorage:
         """Stores a new object"""
         key = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[key] = obj
-        self.obj = obj.__class.__name
+        self.obj = obj.__class__.__name__
     def save(self):
         """Serializes __objects to a JSON file at the specified path (__file_path)"""
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
@@ -41,6 +42,4 @@ class FileStorage:
                     self.new(eval(cls1_name)(**value))
         except Exception:
             pass
-
-      
 
