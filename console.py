@@ -53,11 +53,11 @@ class HBNBCommand(cmd.Cmd):
         lines = line.split()
         if not lines:
             print("** class name missing **")
-            return
+
         my_class = lines[0]
         if  my_class not in self.class_list:
             print("** class doesn't exist **")
-            return
+
         class_instance = eval(my_class)
         class_instance.save()
         print(class_instance.id)
