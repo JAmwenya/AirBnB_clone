@@ -9,6 +9,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
     __file_path = "file.json"
     __objects = {}
@@ -16,18 +17,20 @@ class FileStorage:
     def all(self):
         """This returns the objects dictionary"""
         return FileStorage.__objects
+
     def new(self, obj):
         """Stores a new object"""
         key = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[key] = obj
         self.obj = obj.__class__.__name__
+
     def save(self):
-        """Serializes __objects to a JSON file at the specified path (__file_path)"""
+        """Serializes __objects to a JSON file at the specified path"""
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
             object_dict = FileStorage.__objects
-            my_serialized_obj = {key: obj.to_dict() for key, obj in object_dict.items()}
+            my_serialized_obj = {
+                    key: obj.to_dict() for key, obj in object_dict.items()}
             json.dump(my_serialized_obj, file)
-
 
     def reload(self):
         """

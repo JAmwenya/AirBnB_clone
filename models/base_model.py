@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """ a module that defines a base class"""
 import uuid
-#from models import storage
 from datetime import datetime
 
+
 class BaseModel:
-    """A base model class with default attributes and methods for object representation."""
+    """A base model class with default attributes and methods for object."""
 
     def __init__(self, *args, **kwargs):
         """
@@ -13,7 +13,7 @@ class BaseModel:
 
         Parameters:
         - *args: Variable positional arguments.
-        - **kwargs: Variable keyword arguments. If provided, updates instance attributes accordingly.
+        - **kwargs: Variable kwargs. If provided, updates instance attributes
         """
         if kwargs:
             for key, value in kwargs.items():
@@ -26,11 +26,11 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-    
+
     def to_dict(self):
         """
         Returns:
-        dict: Dictionary containing 'id', 'created_at', 'updated_at', and '__class__' attributes.
+        dict: Dictionary with 'id', 'created_at', 'updated_at', and '__class__
         """
         my1_dict = self.__dict__.copy()
         my1_dict['created_at'] = self.created_at.isoformat()
@@ -44,14 +44,13 @@ class BaseModel:
         storage.new(self)
         self.updated_at = datetime.now()
         storage.save()
-        
 
     def __str__(self):
         """
         Returns a string representation of the object.
 
         Returns:
-        str: String containing class name, instance ID, and instance attributes.
+        str: String with class name, instance ID, and instance attributes.
         """
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)

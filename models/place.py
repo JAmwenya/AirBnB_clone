@@ -4,6 +4,7 @@ module that defines a place
 """
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """Class that creates a place"""
     city_id = ""

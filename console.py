@@ -14,13 +14,15 @@ from models.review import Review
 from models import FileStorage
 import json
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Command processor for the HBNB project
     """
     prompt = "(hbnb) "
     lastcmd = ""
-    class_list = ["Amenity", "City", "Place", "Review", "State", "User", "BaseModel"]
+    class_list = [
+        "Amenity", "City", "Place", "Review", "State", "User", "BaseModel"]
 
     def do_quit(self, line):
         """
@@ -42,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """
-        Creates an instance of BaseModel, saves it to a json file, and prints the id
+        Creates an instance of BaseModel,saves it to  json file  and prints id
         """
         lines = line.split()
         if not lines:
@@ -58,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """
-        Prints the string representation of an instance based on the class name and id
+        Prints string representation of instance based on the class name & id
         """
         lines = line.split()
         if not lines:
@@ -80,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """
-        Deletes an instance based on the class name and id and saves the changes
+        Deletes an instance based on the class name id and saves the changes
         """
         lines = line.split()
         if not lines:
@@ -103,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """
-        Prints all string representations of instances based on the class name or all instances
+        Prints all string representations of instances based on the class name
         """
         lines = line.split()
         if lines and lines[0] not in self.class_list:
@@ -112,7 +114,8 @@ class HBNBCommand(cmd.Cmd):
         my_class = lines[0] if lines else None
         if my_class:
             instances = [
-                    str(value) for key, value in models.storage.all().items() if key.startswith(my_class + ".")]
+                str(value) for key, value in models.storage.all().items()
+                if key.startswith(my_class + ".")]
         else:
             instances = [
                     str(value) for key, value in models.storage.all().items()
@@ -121,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, lines):
         """
-        Updates an instance based on the class name and id by adding or updating an attribute
+        Updates instance based on class name & id
         """
         lines = lines.split()
         if not lines:
@@ -129,8 +132,8 @@ class HBNBCommand(cmd.Cmd):
             return
         my_class = lines[0]
         if my_class not in self.class_list:
-           print("** class doesn't exist **")
-           return
+            print("** class doesn't exist **")
+            return
         if len(lines) < 2:
             print("** instance id missing **")
             return
@@ -151,6 +154,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
